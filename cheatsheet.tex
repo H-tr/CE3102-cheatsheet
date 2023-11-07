@@ -1,0 +1,258 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% writeLaTeX Example: A quick guide to LaTeX
+%
+% Source: Dave Richeson (divisbyzero.com), Dickinson College
+% 
+% A one-size-fits-all LaTeX cheat sheet. Kept to two pages, so it 
+% can be printed (double-sided) on one piece of paper
+% 
+% Feel free to distribute this example, but please keep the referral
+% to divisbyzero.com
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper]{article}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+
+\makeatletter
+\newcommand\xleftrightarrow[2][]{%
+  \ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
+\newcommand\longleftrightarrowfill@{%
+  \arrowfill@\leftarrow\relbar\rightarrow}
+\makeatother
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\tri}{tri}
+
+\pagestyle{empty}
+\makeatletter
+\allowdisplaybreaks
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+% -----------------------------------------------------------------------
+
+\title{CE3102 Signal Processing CheatSheet}
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{center}
+     \Large{\textbf{CE3102 Signal Processing Cheat sheet}} \\
+\end{center}
+\begin{multicols}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section{Basic Formula}
+\begin{align*}
+    \intertext{Trigonometric Functions}
+    \sin(x + y) &= \sin x \cos y + \cos x \sin y\\
+    \sin(x - y) &= \sin x \cos y - \cos x \sin y\\
+    \cos(x + y) &= \cos x \cos y - \sin x \sin y\\
+    \cos(x - y) &= \cos x \cos y + \sin x \sin y\\
+    \sin(2x) &= 2 \sin x \cos x\\
+    \cos(2x) &= 1 - 2 \sin^2 x\\
+    \sin^2 x  &= \frac{1 - \cos 2x}{2}\\
+    \cos^2 x  &= \frac{1 + \cos 2x}{2}\\
+    \sin x \sin y &= \frac{1}{2}\big[\cos(x - y) - \cos(x + y)\big]\\
+    \cos x \cos y &= \frac{1}{2}\big[\cos(x - y) + \cos(x + y)\big]\\
+    \sin x \cos y &= \frac{1}{2}\big[\sin(x + y) + \sin(x - y)\big]\\
+    \sin x + \sin y &= 2 \sin \Big( \frac{x + y}{2} \Big) \cos \Big( \frac{x - y}{2} \Big)\\
+    \sin x - \sin y &= 2 \cos \Big( \frac{x + y}{2} \Big) \sin \Big( \frac{x - y}{2} \Big)\\
+    \cos x + \cos y &= 2 \cos \Big( \frac{x + y}{2} \Big) \cos \Big( \frac{x - y}{2} \Big)\\
+    \cos x - \cos y &= -2 \sin \Big( \frac{x + y}{2} \Big) \sin \Big( \frac{x - y}{2} \Big)\\
+    \sinc x &= \frac{\sin \pi t}{\pi t}
+    \intertext{Euler's Formula}
+    e^{jx} &= \cos x + j\sin x
+\end{align*}
+\section{Fourier Analysis}
+\subsection{CTFS}
+\begin{align*}
+    x(t) &= \sum_{n=-\infty}^\infty c_n e^{j2\pi nf_0 t}, c_n\in\mathbb{C}\\
+    c_n &= \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_0 t}dt\\
+    P &= \sum_{n=-\infty}^\infty |c_n|^2 = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^2 dt
+\end{align*}
+\subsection{CTFT}
+\begin{align*}
+    X(t) &= \int_{-\infty}^\infty x(t)e^{-j2\pi ft}dt\\
+    x(t) &= \frac{1}{2\pi}\int_{-\infty}^\infty X(f) e^{j2\pi ft}dt\\
+    &= \frac{1}{2\pi}\int_{-\infty}^\infty X(w) e^{jwt}dw\\
+    E &= \int_{-\infty}^\infty |x(t)|^2dt = \int_{-\infty}^\infty |X(f)|^2df\\
+    P &= \lim_{T\rightarrow \infty}\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2 dt\\
+    &= \int_{-\infty}^\infty S_{x_p}(f)df\\
+    S_{x_p}(f) &= \sum_{n=-\infty}^\infty |c_n|^2\delta(f-nf_0)
+\end{align*}
+Properties
+\begin{align*}
+    a x_1(t) + b x_2(t) & \xleftrightarrow{\mathcal{F}} a X_1(f) + b X_2(f)\\
+    x(a t) &\xleftrightarrow{\mathcal{F}} \frac{1}{|a|} X(\frac{f}{a})\\
+    X(t) &\xleftrightarrow{\mathcal{F}} x(-f)\\
+    x(t-t_1) &\xleftrightarrow{\mathcal{F}} e^{-j2\pi ft_1}X(f)\\
+    e^{j2\pi f_1 t}x(t) &\xleftrightarrow{\mathcal{F}} X(f-f_1)\\
+    \frac{d}{dt}x(t) &\xleftrightarrow{\mathcal{F}} j2\pi fX(f)\\
+    \frac{d^n}{dt^n}x(t) &\xleftrightarrow{\mathcal{F}} (j2\pi f)^n X(f)\\
+    \int_{-\infty}^t x(\tau)d\tau &\xleftrightarrow{\mathcal{F}} \frac{1}{j2\pi f}X(f) + \frac{1}{2}X(0)\delta(f)\\
+    x_1(t) * x_2(t) &= \int_{-\infty}^\infty x_1(\tau)x_2(t-\tau)d\tau \xleftrightarrow{\mathcal{F}} X_1(f)X_2(f)\\
+    x_1(t) x_2(t) &\xleftrightarrow{\mathcal{F}} \int_{\infty}^\infty X_1(\lambda)X_2(f-\lambda)d\lambda = X_1(f)*X_2(f)
+\end{align*}
+\subsection{DTFS}
+\subsection{DTFT}
+\subsection{Fourier Transform Pairs}
+\begin{align*}
+    \delta(t) &\xleftrightarrow{\mathcal{F}} 1\\
+    \delta(t-t_0)f(t) &\xleftrightarrow{\mathcal{F}} e^{-j2\pi ft_0}f(t_0)\\
+    e^{jw_0t} &\xleftrightarrow{\mathcal{F}} 2\pi \delta(w-w_0)\\
+    e^{-at}u(t) &\xleftrightarrow{\mathcal{F}} \frac{1}{a + jw}\\
+    \tri \frac{t}{T} &\xleftrightarrow{\mathcal{F}} T\sinc^2 (fT) = AT\frac{\sin (\pi ft)}{\pi ft}\\
+    \cos (2\pi f_c t) &\xleftrightarrow{\mathcal{F}} \frac{1}{2}[\delta(f-f_0) + \delta(f + f_0)]\\
+    \sin (2\pi f_c t) &\xleftrightarrow{\mathcal{F}} \frac{1}{2j}[\delta(f-f_0) - \delta(f + f_0)]
+\end{align*}
+\section{Laplace Transform}
+\begin{align*}
+    \intertext{Bilateral Laplace Transform:}
+    \mathcal{L}_b[f(t)] = F_b(s) &= \int_{-\infty}^\infty f(t)e^{-st}dt\\
+    f(t) = \mathcal{L}^{-1}\{F(s)\} &= \frac{1}{2\pi j}\int_{c-j\infty}^{c+j\infty}F(s)e^{st}ds
+    \intertext{Unilateral Laplace Transform:}
+    \mathcal{L}_b[f(t)] = F_b(s) &= \int_0^\infty f(t)e^{-st}dt
+    \intertext{where}
+    s &= \sigma + j\omega
+    \intertext{Frequency Response:}
+    y(t) &= e^{s_0 t}H(s_0)\qquad \text{if} x(t)=e^{s_0 t}\\
+    y(t) &= |H(j\omega_0)|e^{j(\omega_0t+\angle H(j\omega_0))}\\
+    y(t) &= |H(j\omega_0)|\cos (\omega_0t+\angle H(j\omega_0))\\
+\end{align*}
+Properties
+\begin{align*}
+    \mathcal{L}[a_1f_1(t) + a_2f_2(t)] &= a_1F_1(s) + a_2F_2(s)\\
+    \mathcal{L}\left[\frac{df(t)}{dt}\right] &= sF(s) - f(0^+)\\
+    \mathcal{L}\left[\frac{d^nf(t)}{dt^n}\right] &= s^nF(s) - s^{n-1}f(0^+)-\\
+    &\quad \dots - sf^{(n-2)}(0^+) - f^{(n-1)}(0^+)\\
+    \mathcal{L}\left[\int_0^tf(\tau)d\tau\right] &= \frac{F(s)}{s}\\
+    \mathcal{L}[f(t-t_0)u(t-t_0)] &= e^-t_0sF(s)\\
+    \mathcal{L}[e_{-at}f(t)] &= F(s+a)\\
+    \lim_{t\rightarrow 0^+}f(t) &= \lim_{s\rightarrow \infty}sF(s)\\
+    \lim_{t\rightarrow \infty} f(t) &= \lim_{s\rightarrow 0}sF(s)\\
+    \mathcal{L}[tf(t)] &= -\frac{dF(s)}{ds}\\
+    \mathcal{L}[f(at-b)u(at-b)] &= \frac{e^{-sb/a}}{a}F(\frac{s}{a})
+\end{align*}
+\subsection{Laplace Transform Pairs}
+\begin{align*}
+    \delta(t) &\xleftrightarrow{\mathcal{L}} 1, &\text{All s}\\
+    u(t) &\xleftrightarrow{\mathcal{L}} \frac{1}{s}, &\text{Re}(s) > 0\\
+    t &\xleftrightarrow{\mathcal{L}} \frac{1}{s^2}, &\text{Re}(s) > 0\\
+    t^n &\xleftrightarrow{\mathcal{L}} \frac{n!}{s^{n+1}}, &\text{Re}(s) > 0\\
+    e^{-at} &\xleftrightarrow{\mathcal{L}} \frac{1}{s+a}, &\text{Re}(s) > -a\\
+    te^-{at} &\xleftrightarrow{\mathcal{L}} \frac{1}{(s+a)^2}, &\text{Re}(s) > -a\\
+    t^ne^{-at} &\xleftrightarrow{\mathcal{L}} \frac{n!}{(s+a)^{n+1}}, &\text{Re}(s) > -a\\
+    \sin bt &\xleftrightarrow{\mathcal{L}} \frac{b}{s^2+b^2}, &\text{Re}(s) > 0\\
+    \cos bt &\xleftrightarrow{\mathcal{L}} \frac{s}{s^2+b^2}, &\text{Re}(s) > 0\\
+    e^{-at}\sin bt &\xleftrightarrow{\mathcal{L}} \frac{b}{(s+a)^2+b^2}, &\text{Re}(s) > -a\\
+    e^{-at}\cos bt &\xleftrightarrow{\mathcal{L}} \frac{s+a}{(s+a)^2+b^2}, &\text{Re}(s) > -a\\
+    t\sin bt &\xleftrightarrow{\mathcal{L}} \frac{2bs}{(s^2+b^2)^2}, &\text{Re}(s) > 0\\
+    t\cos bt &\xleftrightarrow{\mathcal{L}} \frac{s^2-b^2}{(s^2+b^2)^2}, &\text{Re}(s) > 0\\
+    2e^{-at}\cos (\beta t+c) &\xleftrightarrow{\mathcal{L}} \frac{e^{jc}}{s+a-j\beta}+\frac{e^{-jc}}{s+a+j\beta} &\text{Re}(s) > -a
+\end{align*}
+\section{Z Transform}
+\begin{align*}
+    \intertext{Bilateral Z Transform:}
+    X(z) &= \sum_{-\infty}^\infty x[n]z^{-n}\\
+    \intertext{Unilateral Z Transform:}
+    X(z) &= \sum_{0}^{\infty} x[n]z^{-n}
+    \intertext{Frequency Response:}
+    y[n] &= z_0^nH(z_0)\qquad\text{if }x[n] = z_0^n\\
+    y[n] &= |H(e^{\omega_0j})|e^{j(\omega_0 n + \angle H(e^{\omega_0 j}))}\\
+    y[n] &= |H(e^{\omega_0j})|\cos (\omega_0 n + \angle H(e^{\omega_0 j}))
+\end{align*}
+Properties
+\begin{align*}
+    a x_1[n] + b x_2[n] &\xleftrightarrow{\mathcal{Z}} aX_1[z] + bX_2[z]\\
+    x[n-m]u[n-m] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^m}X[z]\\
+    x[n-m]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^m}X[z] + \frac{1}{z^m}\sum_{n=1}^mx[-n]z^n\\
+    x[n-1]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z}X[z] + x[-1]\\
+    x[n-2]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^2}X[z] + \frac{1}{z}x[-1] + x[-2]\\
+    x[n+m]u[n] &\xleftrightarrow{\mathcal{Z}} z^mX[z] - z^m\sum_{n=0}^{m-1}x[n]z^-n\\
+    a^n x[n]u[n] &\xleftrightarrow{\mathcal{Z}} X[\frac{z}{a}]\\
+    nx[n]u[n] &\xleftrightarrow{\mathcal{Z}} -z\frac{d}{dz}X[z]\\
+    x[-n] &\xleftrightarrow{\mathcal{Z}} X[\frac{1}{z}]\\
+    x_1[n]*x_2[n] &\xleftrightarrow{\mathcal{Z}} X_1[z]X_2[z]\\
+    x[0] &\xleftrightarrow{\mathcal{Z}} \lim_{z\rightarrow \infty}X[z]\\
+    \lim_{N\rightarrow\infty}x[N] &\xleftrightarrow{\mathcal{Z}} \lim_{z\rightarrow 1}(z-1)X[z]
+\end{align*}
+\subsection{Z Transform Pairs}
+\begin{align*}
+    \delta [n] &\xleftrightarrow{\mathcal{Z}} 1, &\text{All z}\\
+    u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{{1 - z^-1}},&\left| z \right| > 1\\
+    a^n u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{1 - az^{-1}},&\left| z \right| > \left| a \right|\\
+    -a^n u[-n-1] &\xleftrightarrow{\mathcal{Z}} \frac{1}{1 - az^{-1}},&\left| z \right| < \left| a \right|\\
+    na^n u[n] &\xleftrightarrow{\mathcal{Z}} \frac{{az^{-1}}}{{\left( {1 - az^{-1}} \right)^2 }},&\left| z \right| > \left| a \right|\\
+    -na^n u[-n-1] &\xleftrightarrow{\mathcal{Z}} \frac{{az^{-1}}}{{\left( {1 - az^{-1}} \right)^2 }},&\left| z \right| < \left| a \right|\\
+    \left|a\right|^n\cos (\beta n)u[n] &\xleftrightarrow{\mathcal{Z}} \frac{z(z-\left|a\right|\cos (\beta))}{z^2-2|a|\cos(\beta)z+|a|^2}, &|z|>|a|\\
+    \left|a\right|^n\sin (\beta n)u[n] &\xleftrightarrow{\mathcal{Z}} \frac{z|a|\sin(\beta)}{z^2-2|a|\cos(\beta)z+|a|^2}, &|z|>|a|\\
+    \left|a\right|^n\sin (\beta n + \theta)u[n] &\xleftrightarrow{\mathcal{Z}} \frac{z(z\cos(\theta)-|a|\cos(\beta-\theta))}{z^2-2|a|\cos(\beta)z+|a|^2}, &|z|>|a|\\
+    &\qquad=\frac{(0.5e^{j\theta})z}{z-|a|e^{j\beta}}+\frac{(0.5e^{-j\theta})z}{z-|a|e^{-j\beta}}
+\end{align*}
+\subsection{ROC}
+\begin{equation*}
+    \text{finity}
+        \begin{cases}
+            & \text{right sided(causal): } \{z \in \mathbb{Z}, \sim(z\in \{0\})\}\\
+            & \text{left sided(anti-causal): } \{z\in \mathbb{Z}, \sim(z\in\{\infty\})\}\\
+            & \text{non-causal: } \{z\in \mathbb{Z}, \sim(z\in\{0, \infty\})\}
+        \end{cases}
+\end{equation*}
+\begin{equation*}
+    \text{infinity}
+        \begin{cases}
+            & \text{right sided(causal): } \{z \in \mathbb{Z}, |z| > r_1\}\\
+            & \text{left sided(anti-causal): } \{z \in \mathbb{Z}, |z| < r_2\}\\
+            & \text{non-causal: } \{z \in \mathbb{Z}, r_1 < |z| < r_2\}
+        \end{cases}
+\end{equation*}
+\end{multicols}
+
+\end{document}
