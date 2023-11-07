@@ -1,0 +1,42 @@
+\section{Fourier Analysis}
+\subsection{CTFS}
+\begin{align*}
+    x(t) &= \sum_{n=-\infty}^\infty c_n e^{j2\pi nf_0 t}, c_n\in\mathbb{C}\\
+    c_n &= \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_0 t}dt\\
+    P &= \sum_{n=-\infty}^\infty |c_n|^2 = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^2 dt
+\end{align*}
+\subsection{CTFT}
+\begin{align*}
+    X(t) &= \int_{-\infty}^\infty x(t)e^{-j2\pi ft}dt\\
+    x(t) &= \frac{1}{2\pi}\int_{-\infty}^\infty X(f) e^{j2\pi ft}dt\\
+    &= \frac{1}{2\pi}\int_{-\infty}^\infty X(w) e^{jwt}dw\\
+    E &= \int_{-\infty}^\infty |x(t)|^2dt = \int_{-\infty}^\infty |X(f)|^2df\\
+    P &= \lim_{T\rightarrow \infty}\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2 dt\\
+    &= \int_{-\infty}^\infty S_{x_p}(f)df\\
+    S_{x_p}(f) &= \sum_{n=-\infty}^\infty |c_n|^2\delta(f-nf_0)
+\end{align*}
+Properties
+\begin{align*}
+    a x_1(t) + b x_2(t) & \xleftrightarrow{\mathcal{F}} a X_1(f) + b X_2(f)\\
+    x(a t) &\xleftrightarrow{\mathcal{F}} \frac{1}{|a|} X(\frac{f}{a})\\
+    X(t) &\xleftrightarrow{\mathcal{F}} x(-f)\\
+    x(t-t_1) &\xleftrightarrow{\mathcal{F}} e^{-j2\pi ft_1}X(f)\\
+    e^{j2\pi f_1 t}x(t) &\xleftrightarrow{\mathcal{F}} X(f-f_1)\\
+    \frac{d}{dt}x(t) &\xleftrightarrow{\mathcal{F}} j2\pi fX(f)\\
+    \frac{d^n}{dt^n}x(t) &\xleftrightarrow{\mathcal{F}} (j2\pi f)^n X(f)\\
+    \int_{-\infty}^t x(\tau)d\tau &\xleftrightarrow{\mathcal{F}} \frac{1}{j2\pi f}X(f) + \frac{1}{2}X(0)\delta(f)\\
+    x_1(t) * x_2(t) &= \int_{-\infty}^\infty x_1(\tau)x_2(t-\tau)d\tau \xleftrightarrow{\mathcal{F}} X_1(f)X_2(f)\\
+    x_1(t) x_2(t) &\xleftrightarrow{\mathcal{F}} \int_{\infty}^\infty X_1(\lambda)X_2(f-\lambda)d\lambda = X_1(f)*X_2(f)
+\end{align*}
+\subsection{DTFS}
+\subsection{DTFT}
+\subsection{Fourier Transform Pairs}
+\begin{align*}
+    \delta(t) &\xleftrightarrow{\mathcal{F}} 1\\
+    \delta(t-t_0)f(t) &\xleftrightarrow{\mathcal{F}} e^{-j2\pi ft_0}f(t_0)\\
+    e^{jw_0t} &\xleftrightarrow{\mathcal{F}} 2\pi \delta(w-w_0)\\
+    e^{-at}u(t) &\xleftrightarrow{\mathcal{F}} \frac{1}{a + jw}\\
+    \tri \frac{t}{T} &\xleftrightarrow{\mathcal{F}} T\sinc^2 (fT) = AT\frac{\sin (\pi ft)}{\pi ft}\\
+    \cos (2\pi f_c t) &\xleftrightarrow{\mathcal{F}} \frac{1}{2}[\delta(f-f_0) + \delta(f + f_0)]\\
+    \sin (2\pi f_c t) &\xleftrightarrow{\mathcal{F}} \frac{1}{2j}[\delta(f-f_0) - \delta(f + f_0)]
+\end{align*}

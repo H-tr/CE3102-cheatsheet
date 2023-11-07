@@ -1,0 +1,56 @@
+\section{Z Transform}
+\begin{align*}
+    \intertext{Bilateral Z Transform:}
+    X(z) &= \sum_{-\infty}^\infty x[n]z^{-n}\\
+    \intertext{Unilateral Z Transform:}
+    X(z) &= \sum_{0}^{\infty} x[n]z^{-n}
+    \intertext{Frequency Response:}
+    y[n] &= z_0^nH(z_0)\qquad\text{if }x[n] = z_0^n\\
+    y[n] &= |H(e^{\omega_0j})|e^{j(\omega_0 n + \angle H(e^{\omega_0 j}))}\\
+    y[n] &= |H(e^{\omega_0j})|\cos (\omega_0 n + \angle H(e^{\omega_0 j}))
+\end{align*}
+Properties
+\begin{align*}
+    a x_1[n] + b x_2[n] &\xleftrightarrow{\mathcal{Z}} aX_1[z] + bX_2[z]\\
+    x[n-m]u[n-m] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^m}X[z]\\
+    x[n-m]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^m}X[z] + \frac{1}{z^m}\sum_{n=1}^mx[-n]z^n\\
+    x[n-1]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z}X[z] + x[-1]\\
+    x[n-2]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^2}X[z] + \frac{1}{z}x[-1] + x[-2]\\
+    x[n+m]u[n] &\xleftrightarrow{\mathcal{Z}} z^mX[z] - z^m\sum_{n=0}^{m-1}x[n]z^-n\\
+    a^n x[n]u[n] &\xleftrightarrow{\mathcal{Z}} X[\frac{z}{a}]\\
+    nx[n]u[n] &\xleftrightarrow{\mathcal{Z}} -z\frac{d}{dz}X[z]\\
+    x[-n] &\xleftrightarrow{\mathcal{Z}} X[\frac{1}{z}]\\
+    x_1[n]*x_2[n] &\xleftrightarrow{\mathcal{Z}} X_1[z]X_2[z]\\
+    x[0] &\xleftrightarrow{\mathcal{Z}} \lim_{z\rightarrow \infty}X[z]\\
+    \lim_{N\rightarrow\infty}x[N] &\xleftrightarrow{\mathcal{Z}} \lim_{z\rightarrow 1}(z-1)X[z]
+\end{align*}
+\subsection{Z Transform Pairs}
+\begin{align*}
+    \delta [n] &\xleftrightarrow{\mathcal{Z}} 1, &\text{All z}\\
+    u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{{1 - z^-1}},&\left| z \right| > 1\\
+    a^n u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{1 - az^{-1}},&\left| z \right| > \left| a \right|\\
+    -a^n u[-n-1] &\xleftrightarrow{\mathcal{Z}} \frac{1}{1 - az^{-1}},&\left| z \right| < \left| a \right|\\
+    na^n u[n] &\xleftrightarrow{\mathcal{Z}} \frac{{az^{-1}}}{{\left( {1 - az^{-1}} \right)^2 }},&\left| z \right| > \left| a \right|\\
+    -na^n u[-n-1] &\xleftrightarrow{\mathcal{Z}} \frac{{az^{-1}}}{{\left( {1 - az^{-1}} \right)^2 }},&\left| z \right| < \left| a \right|\\
+    \left|a\right|^n\cos (\beta n)u[n] &\xleftrightarrow{\mathcal{Z}} \frac{z(z-\left|a\right|\cos (\beta))}{z^2-2|a|\cos(\beta)z+|a|^2}, &|z|>|a|\\
+    \left|a\right|^n\sin (\beta n)u[n] &\xleftrightarrow{\mathcal{Z}} \frac{z|a|\sin(\beta)}{z^2-2|a|\cos(\beta)z+|a|^2}, &|z|>|a|\\
+    \left|a\right|^n\sin (\beta n + \theta)u[n] &\xleftrightarrow{\mathcal{Z}} \frac{z(z\cos(\theta)-|a|\cos(\beta-\theta))}{z^2-2|a|\cos(\beta)z+|a|^2}, &|z|>|a|\\
+    &\qquad=\frac{(0.5e^{j\theta})z}{z-|a|e^{j\beta}}+\frac{(0.5e^{-j\theta})z}{z-|a|e^{-j\beta}}
+\end{align*}
+\subsection{ROC}
+\begin{equation*}
+    \text{finity}
+        \begin{cases}
+            & \text{right sided(causal): } \{z \in \mathbb{Z}, \sim(z\in \{0\})\}\\
+            & \text{left sided(anti-causal): } \{z\in \mathbb{Z}, \sim(z\in\{\infty\})\}\\
+            & \text{non-causal: } \{z\in \mathbb{Z}, \sim(z\in\{0, \infty\})\}
+        \end{cases}
+\end{equation*}
+\begin{equation*}
+    \text{infinity}
+        \begin{cases}
+            & \text{right sided(causal): } \{z \in \mathbb{Z}, |z| > r_1\}\\
+            & \text{left sided(anti-causal): } \{z \in \mathbb{Z}, |z| < r_2\}\\
+            & \text{non-causal: } \{z \in \mathbb{Z}, r_1 < |z| < r_2\}
+        \end{cases}
+\end{equation*}
