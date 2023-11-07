@@ -40,6 +40,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Special thanks to the faculty at NTU and the CE3102 Signal Processing course for their valuable insights and teaching materials.
 
-For any questions or issues, please feel free to contact [your email address].
+For any questions or issues, please feel free to contact tianrunhu@gmail.com.
 
 Happy studying!
