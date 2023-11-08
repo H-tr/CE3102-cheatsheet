@@ -14,6 +14,11 @@
     P &= \lim_{T\rightarrow \infty}\frac{1}{T}\int_{-T/2}^{T/2}|x(t)|^2 dt\\
     &= \int_{-\infty}^\infty S_{x_p}(f)df\\
     S_{x_p}(f) &= \sum_{n=-\infty}^\infty |c_n|^2\delta(f-nf_0)
+    \intertext{Frequency response:}
+    y(t) &= \sum_{k=1}^K c'_{k}e^{j(\omega_kt+\theta_k)}\\
+    c'_k &= c_k\mathcal{H}(\omega_k)\\
+    x(t) &= \sum_{k=1}^Kc_ke^{j(w_kt+\theta_k)}\\
+    \mathcal{H}(\omega) &= \int_{-\infty}^\infty e^{-j\omega\tau}h(\tau)d\tau
 \end{align*}
 Properties
 \begin{align*}
