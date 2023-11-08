@@ -8,11 +8,14 @@
     y[n] &= z_0^nH(z_0)\qquad\text{if }x[n] = z_0^n\\
     y[n] &= |H(e^{\omega_0j})|e^{j(\omega_0 n + \angle H(e^{\omega_0 j}))}\\
     y[n] &= |H(e^{\omega_0j})|\cos (\omega_0 n + \angle H(e^{\omega_0 j}))
+    \intertext{Stability:}
+    z \in \text{ROC iff }& \{h[n]z^{-n}\} \text{ is absolutely summable}, i.e.,\\
+    S(z) &= \sum_{-\infty}^\infty |h[n]||z|^{-n} < \infty
 \end{align*}
 Properties
 \begin{align*}
     a x_1[n] + b x_2[n] &\xleftrightarrow{\mathcal{Z}} aX_1[z] + bX_2[z]\\
-    x[n-m]u[n-m] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^m}X[z]\\
+    x[n-m]u[n-m] &\xleftrightarrow{\mathcal{Z}} z^{-m}X[z]\\
     x[n-m]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^m}X[z] + \frac{1}{z^m}\sum_{n=1}^mx[-n]z^n\\
     x[n-1]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z}X[z] + x[-1]\\
     x[n-2]u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{z^2}X[z] + \frac{1}{z}x[-1] + x[-2]\\
@@ -27,7 +30,7 @@ Properties
 \subsection{Z Transform Pairs}
 \begin{align*}
     \delta [n] &\xleftrightarrow{\mathcal{Z}} 1, &\text{All z}\\
-    u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{{1 - z^-1}},&\left| z \right| > 1\\
+    u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{{1 - z^{-1}}},&\left| z \right| > 1\\
     a^n u[n] &\xleftrightarrow{\mathcal{Z}} \frac{1}{1 - az^{-1}},&\left| z \right| > \left| a \right|\\
     -a^n u[-n-1] &\xleftrightarrow{\mathcal{Z}} \frac{1}{1 - az^{-1}},&\left| z \right| < \left| a \right|\\
     na^n u[n] &\xleftrightarrow{\mathcal{Z}} \frac{{az^{-1}}}{{\left( {1 - az^{-1}} \right)^2 }},&\left| z \right| > \left| a \right|\\
