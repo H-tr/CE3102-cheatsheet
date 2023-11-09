@@ -35,14 +35,24 @@ Properties
 \end{align*}
 \subsection{DTFS}
 \begin{align*}
-    X(\Omega) &= \sum_{k=0}^{k=N-1}2\pi c_k \delta(\Omega-\frac{2\pi}{N}k)\\
-    c_k &= \frac{1}{N}\sum_{n=0}^{N-1}\title{x}[n]e^{-j\frac{2\pi}{N}\Omega kn}
+    \intertext{Analysis}
+    X(\Omega) &= \sum_{k=0}^{N-1}2\pi c_k \delta(\Omega-\frac{2\pi}{N}k)\\
+    c_k &= \frac{1}{N}\sum_{n=0}^{N-1}\Tilde{x}[n]e^{-j\frac{2\pi}{N}\Omega kn}\\
+    \intertext{Synthesis}
+    \Tilde{x}[n] &= \sum_{k=0}^{N-1} c_k e^{j\frac{2\pi}{N}kn}, n\in \mathbb{Z}\\
+    \Tilde{x}[n] &= \frac{1}{2T}\int_0^{2\pi}X(\Omega)e^{j\Omega n}d\Omega
 \end{align*}
 \subsection{DTFT}
 \begin{align*}
+    \intertext{Analysis}
     X(\Omega) &= \sum_{n=-\infty}^\infty x[n] e^{-j\Omega_n n}
+    \intertext{Synthesis}
+    x[n] &= \frac{1}{2T}\int_0^{2\pi}X(\Omega)e^{j\Omega n}d\Omega
 \end{align*}
 \subsection{DFT}
+\begin{align*}
+    X[k] &= \sum_{n=0}^{N-1}x[n]e^{-j\frac{2\pi}{N}kn}
+\end{align*}
 \subsection{Fourier Transform Pairs}
 \begin{align*}
     \delta(t) &\xleftrightarrow{\mathcal{F}} 1\\
