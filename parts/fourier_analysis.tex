@@ -44,14 +44,13 @@ Properties
 \end{align*}
 \subsection{DTFT}
 \begin{align*}
-    \intertext{Analysis}
-    X(\Omega) &= \sum_{n=-\infty}^\infty x[n] e^{-j\Omega_n n}
-    \intertext{Synthesis}
+    X(\Omega) &= \sum_{n=-\infty}^\infty x[n] e^{-j\Omega_n n}\\
     x[n] &= \frac{1}{2T}\int_0^{2\pi}X(\Omega)e^{j\Omega n}d\Omega
 \end{align*}
 \subsection{DFT}
 \begin{align*}
-    X[k] &= \sum_{n=0}^{N-1}x[n]e^{-j\frac{2\pi}{N}kn}
+    X[k] &= \sum_{n=0}^{N-1}x[n]e^{-j\frac{2\pi}{N}kn}\\
+    x[n] &= \frac{1}{N}\sum_{k=0}^{N-1}X[k]e^{j\frac{2\pi}{N}kn}
 \end{align*}
 \subsection{Fourier Transform Pairs}
 \begin{align*}
