@@ -7,7 +7,7 @@
 \end{align*}
 \subsection{CTFT}
 \begin{align*}
-    X(t) &= \int_{-\infty}^\infty x(t)e^{-j2\pi ft}dt\\
+    X(f) &= \int_{-\infty}^\infty x(t)e^{-j2\pi ft}dt\\
     x(t) &= \frac{1}{2\pi}\int_{-\infty}^\infty X(f) e^{j2\pi ft}dt\\
     &= \frac{1}{2\pi}\int_{-\infty}^\infty X(w) e^{jwt}dw\\
     E &= \int_{-\infty}^\infty |x(t)|^2dt = \int_{-\infty}^\infty |X(f)|^2df\\
@@ -34,7 +34,15 @@ Properties
     x_1(t) x_2(t) &\xleftrightarrow{\mathcal{F}} \int_{\infty}^\infty X_1(\lambda)X_2(f-\lambda)d\lambda = X_1(f)*X_2(f)
 \end{align*}
 \subsection{DTFS}
+\begin{align*}
+    X(\Omega) &= \sum_{k=0}^{k=N-1}2\pi c_k \delta(\Omega-\frac{2\pi}{N}k)\\
+    c_k &= \frac{1}{N}\sum_{n=0}^{N-1}\title{x}[n]e^{-j\frac{2\pi}{N}\Omega kn}
+\end{align*}
 \subsection{DTFT}
+\begin{align*}
+    X(\Omega) &= \sum_{n=-\infty}^\infty x[n] e^{-j\Omega_n n}
+\end{align*}
+\subsection{DFT}
 \subsection{Fourier Transform Pairs}
 \begin{align*}
     \delta(t) &\xleftrightarrow{\mathcal{F}} 1\\
