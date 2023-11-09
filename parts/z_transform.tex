@@ -1,7 +1,7 @@
 \section{Z Transform}
 \begin{align*}
     \intertext{Bilateral Z Transform:}
-    X(z) &= \sum_{-\infty}^\infty x[n]z^{-n}\\
+    X(z) &= \sum_{n=-\infty}^\infty x[n]z^{-n}\\
     \intertext{Unilateral Z Transform:}
     X(z) &= \sum_{0}^{\infty} x[n]z^{-n}
     \intertext{Frequency Response:}
@@ -10,7 +10,7 @@
     y[n] &= |H(e^{\omega_0j})|\cos (\omega_0 n + \angle H(e^{\omega_0 j}))
     \intertext{Stability:}
     z \in \text{ROC iff }& \{h[n]z^{-n}\} \text{ is absolutely summable}, i.e.,\\
-    S(z) &= \sum_{-\infty}^\infty |h[n]||z|^{-n} < \infty
+    S(z) &= \sum_{n=-\infty}^\infty |h[n]||z|^{-n} < \infty
 \end{align*}
 Properties
 \begin{align*}
